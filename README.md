@@ -42,7 +42,7 @@ El objetivo es calcular el porcentaje de usuarios por categoría, visualizar los
 
 ## 📊 Resultados
 Ejemplo de visualización generada:
-
+![Linea del Tiempo de vehiculos registrados](images/LineaTiempo.png)
 
 ## 📚 Fuentes de datos
 - [IMEPLAN - Encuesta Origen Destino](https://imeplan.mx/)

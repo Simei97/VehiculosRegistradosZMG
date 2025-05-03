@@ -46,7 +46,7 @@ Ejemplo de visualización generada:
 
 ## 📚 Fuentes de datos
 - [IMEPLAN - Encuesta Origen Destino](https://imeplan.mx/)
-- [Gobierno de Jalisco - Movilidad](https://www.jalisco.gob.mx/es/gobierno/organismos/movilidad)
+- [Datos Abiertos del Estado de Jalisco](https://datos.jalisco.gob.mx/dataset/vehiculos-de-motor-registrados-en-circulacion-por-municipio-en-jalisco-1998-2020)
 
 ## 🧑‍💻 Autor
 - Simei97

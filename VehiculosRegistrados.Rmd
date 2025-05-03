@@ -1,0 +1,135 @@
+---
+title: "VehiculosRegistrados"
+author: "Javier"
+date: "2025-05-03"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+## Cargamos nuestros paquetes que requeriremos
+```{r}
+library(tidyverse)
+library(scales)
+library(plotly)
+```
+
+## Cargamos el archivo que analizaremos
+```{r}
+datos <- read_csv("Vehiculos Registrados Jalisco.csv")
+```
+
+## Vemos las primeras filas de nuestra tabla
+```{r}
+head(datos)
+```
+
+## Nombramos una variable que almacene todos los años (1980-2023)
+```{r}
+Año <- c(1980:2023)
+```
+
+## Transformamos nuestros datos a un formato largo
+```{r}
+datos_largo <- datos %>% 
+        pivot_longer(
+                cols = matches("^\\d{4}$"),
+                names_to = "Año",
+                values_to = "Total"
+        ) %>% 
+        mutate(
+                Año = as.integer(Año),
+                Total = na_if(Total, 0),
+                Total = as.numeric(Total)
+        )
+```
+
+## Filtraremos solo los municipios de la ZMG
+```{r}
+municipios_meta <- c("Guadalajara", "Zapopan", "San Pedro Tlaquepaque", "Tonala", "Tlajomulco de Zuniga")
+
+datos_filtrados <- datos_largo %>% 
+        filter(Municipio %in% municipios_meta)
+```
+
+## Creamos una gráfica donde crearemos una línea del tiempo
+```{r}
+grafica <- ggplot(datos_filtrados, aes(x = Año, y = Total, color = Municipio)) +
+        geom_line(linewidth = 1.2, na.rm = TRUE) +
+        geom_point(size = 1.5, na.rm = TRUE, aes(text = paste0(
+                "Municipio: ", Municipio, "<br>",
+                "Año: ", Año, "<br>",
+                "Total: ", scales::comma(Total)
+        ))) +
+        labs(title = "Evolución de vehículos registrados (1980-2023)",
+             subtitle = "Municipios del AMG",
+             caption = "Fuente: Insituto de Información Estadistica y Geografica de Jalisco",
+             x = "Año",
+             y = "Total registrado") +
+        scale_y_continuous(labels = label_comma()) +
+        theme_minimal()
+```
+
+## Nuestra linea del tiempo será interactiva, si posamos nuestro mouse en alguno de los puntos, nos brindará la información sobre el municipio, año y cantidad de vehiculos registrados.
+```{r}
+grafica_interactiva <- ggplotly(grafica, tooltip = "text")
+grafica_interactiva
+```
+
+## Nombramos las variables que utilizaremos para agrupar el numero maximo y minimo de vehiculos registrados
+```{r}
+registro_max <- datos_filtrados %>%
+        group_by(Año) %>%
+        filter(Total == max(Total, na.rm = TRUE)) %>%
+        ungroup()
+
+registro_min <- datos_filtrados %>%
+        group_by(Año) %>%
+        filter(Total == min(Total, na.rm = TRUE)) %>%
+        ungroup()
+```
+
+
+## Agregamos puntos para el municipio con mayores vehiculos registrados por año
+```{r}
+grafica_max <- grafica +
+        geom_point(data = registro_max, aes(x = Año, y = Total, color = Municipio), 
+                   size = 3, shape = 17, color = "red") +
+        labs(title = "Municipios con mayor registro de vehículos (1980-2023)",
+             caption = "Fuente: Instituto de Información Estadistica y Geografica de Jalisco")
+```
+
+## Agregamos puntos para el municipio con menores vehiculos registrados por año
+```{r}
+grafica_min <- grafica +
+        geom_point(data = registro_min, aes(x = Año, y = Total, color = Municipio), 
+                   size = 3, shape = 17, color = "blue") +
+        labs(title = "Municipios con menor registro de vehículos (1980-2023)",
+             caption = "Fuente: Instituto de Información Estadistica y Geografica de Jalisco")
+```
+
+## Convertimos nuestras gráficas de manera que tambien sean interactivas
+
+## Mostramos el grafico con el municipio con el mayor registro de vehiculos
+```{r}
+grafica_max_interactiva <- ggplotly(grafica_max, tooltip = "text")
+grafica_max_interactiva
+```
+
+## Mostramos el grafico con el municipio con el menor registro de vehiculos
+```{r}
+grafica_min_interactiva <- ggplotly(grafica_min, tooltip = "text")
+grafica_min_interactiva
+```
+
+
+
+
+
+
+
+
+
+
+
+

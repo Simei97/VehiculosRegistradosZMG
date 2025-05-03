@@ -43,10 +43,6 @@ El objetivo es calcular el porcentaje de usuarios por categoría, visualizar los
    ```bash
    install.packages(c("tidyverse", "readr", "plotly", "scales"))
    
-3. Corre los scripts desde la carpeta **scripts/:**
-   - Para analizar los datos desde un **.csv**
-  
-4. Explora los gráficos en la carpeta **images/**
 
 ## 📊 Resultados
 Ejemplo de visualización generada:

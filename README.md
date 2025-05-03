@@ -15,7 +15,7 @@ El objetivo es calcular el porcentaje de usuarios por categoría, visualizar los
 
 - **SQL**: para la gestión y consultas de datos.
 - **R**:
-  - Librerías: `ggplot2`, `readr`, `DBI`, `RMySQL`
+  - Librerías: `tidyverse`, `scales`, `plotly`.
 - **FPDF (Python)**: para generación de documentos PDF.
 - **Git & GitHub**: control de versiones y publicación.
 

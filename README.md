@@ -1,11 +1,8 @@
-# 📊 Análisis del Uso de Transporte en Guadalajara (2025)
+# 📊 Análisis de Vehículos Registrados en Municipios Metropolitanos de Jalisco (1980–2023)
 
 ## 🚀 Descripción del Proyecto
 
-Este proyecto analiza los tipos de transporte más utilizados en Guadalajara, Jalisco, agrupándolos en tres categorías:  
-- **Transporte Público** (camión, tren ligero, MiBici)  
-- **Transporte Privado** (Uber, Didi, entre otras plataformas)  
-- **Transporte Personal** (bicicleta, motocicleta, automóvil propio)
+Este proyecto realiza un análisis exploratorio y visualización interactiva de los vehículos registrados en los principales municipios del Área Metropolitana de Guadalajara (AMG), utilizando datos históricos desde 1980 hasta 2023.
 
 El objetivo es calcular el porcentaje de usuarios por categoría, visualizar los resultados y detectar patrones que ayuden a entender la movilidad actual en la ciudad.
 
@@ -13,15 +10,27 @@ El objetivo es calcular el porcentaje de usuarios por categoría, visualizar los
 
 ## 🛠️ Herramientas Utilizadas
 
-- **SQL**: para la gestión y consultas de datos.
-- **R**:
-  - Librerías: `tidyverse`, `scales`, `plotly`.
-- **FPDF (Python)**: para generación de documentos PDF.
-- **Git & GitHub**: control de versiones y publicación.
+- **R** como lenguaje de programación
+- `tidyverse` para manipulación y limpieza de datos
+- `plotly` para gráficos interactivos
+- `scales` para el formato numérico
+- `ggplot2` para visualización de datos
 
 ---
+## 📌 Funcionalidades principales
 
-## 📂 Estructura del Repositorio
+- Transformación de un conjunto de datos de formato ancho a largo.
+- Filtrado de los municipios pertenecientes al AMG:
+  - *Guadalajara*
+  - *Zapopan*
+  - *San Pedro Tlaquepaque*
+  - *Tonalá*
+  - *Tlajomulco de Zúñiga*
+- Gráfica interactiva de la evolución de vehículos registrados por municipio.
+- Visualización adicional del municipio con:
+  - El **mayor** número de vehículos registrados por año.
+  - El **menor** número de vehículos registrados por año.
+
 ---
 
 ## 📥 Cómo Reproducir el Proyecto
@@ -32,11 +41,10 @@ El objetivo es calcular el porcentaje de usuarios por categoría, visualizar los
 
 2. Instala las dependencias necesarias en R:
    ```bash
-   install.packages(c("ggplot2", "readr", "DBI", "RMySQL"))
+   install.packages(c("tidyverse", "readr", "plotly", "scales"))
    
 3. Corre los scripts desde la carpeta **scripts/:**
    - Para analizar los datos desde un **.csv**
-   - O conectar a la base de datos en SQL si prefieres
   
 4. Explora los gráficos en la carpeta **images/**
 
